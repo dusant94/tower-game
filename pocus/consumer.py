@@ -1,7 +1,7 @@
 import asyncio
 import json
 import aio_pika
-from hocus.server import sio
+from pocus.server import sio
 
 async def main(loop):
     connection = await aio_pika.connect_robust(
@@ -9,7 +9,6 @@ async def main(loop):
     )
 
     queue_name = "tower_update"
-    queue_name2 = "attack Pocus"
 
     async with connection:
         # Creating channel
@@ -28,16 +27,6 @@ async def main(loop):
                     if queue.name in message.body.decode():
                         break
 
-        queue2 = await channel.declare_queue(queue_name2, auto_delete=True)
-
-        async with queue2.iterator() as queue_iter:
-            async for message in queue_iter:
-                async with message.process():
-                    msg = message.body.decode('utf8')
-                    print(msg)
- 
-                    if queue.name in message.body.decode():
-                        break
 
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()

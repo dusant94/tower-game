@@ -18,4 +18,8 @@ Start servers
 2. hocus/server.py
 3. pocus/server.py
 
+Aio pika consumers
+1. api/amqp_consumer.py
+2. hocus/consumer.py
+3. pocus/conusmer.py
  
