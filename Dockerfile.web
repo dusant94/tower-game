@@ -1,0 +1,10 @@
+FROM python:3.7.4-alpine3.10
+
+ARG WEB_FOLDER=./storage/views/
+COPY ${WEB_FOLDER} /app/
+
+RUN mv /app/our-very-cool-custom-vue-client.html /app/index.html
+
+CMD ["python", "-m", "http.server", "8001", "--directory", "/app/"]
+
+EXPOSE 8000

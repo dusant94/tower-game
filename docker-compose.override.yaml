@@ -1,0 +1,32 @@
+version: "3.5"
+services:
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - 8090:80
+    environment: # todo: env file
+      - POSTGRES_USER=sbp
+      - PGADMIN_DEFAULT_EMAIL=sbp@sbp.com
+      - PGADMIN_DEFAULT_PASSWORD=sbp
+    networks:
+      - bpnet
+
+  pgmaster:
+    ports:
+      - 5432:5432
+
+  rabbit:
+    ports:
+      - "8888:15672"
+      - "5672:5672"
+
+  app:
+    ports:
+      - 8000:8000
+
+  web_app:
+    ports:
+      - 8001:8000
+

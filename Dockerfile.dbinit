@@ -1,0 +1,16 @@
+FROM python:3.7.4
+
+RUN mkdir /app
+COPY . /app
+WORKDIR /app
+
+ARG CONFIG_FOLDER=./storage/config_templates/docker
+
+COPY ${CONFIG_FOLDER} /app/storage/config
+
+RUN pip install -r requirements.txt
+
+VOLUME ["/app/storage/csvs"]
+
+CMD ["python", "tools/dbinit.py"]
+
